@@ -21,3 +21,16 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+yarn.lock
+package
+package-lock
+
+/src/serviceWorker
+/src/setupTests
+
+/public/favicon
+/public/logo192
+/public/logo512
+/public/robots
+
