@@ -1,14 +1,13 @@
 import React from 'react';
-import Search from './components/search';
-import Stats from './components/stats'
-import './App.css';
+import {Search} from './components/search';
+import './style.css';
 
 
 const App = () =>{
   return(
-    <>
+    <div className="App">
       <Search />
-    </>
+    </div>
   )
 }
 

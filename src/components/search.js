@@ -1,69 +1,102 @@
-import React,{useState} from 'react';
-import Info from './info'
+import React, {useState} from 'react'
 import Stats from './stats'
 
-const Search = () =>{
+import '../style.css'
 
-  const APP_ID = "fd252eb4";
-  const APP_KEY = "d4916eb493b2039e2b8fa3f54b096386";
+export const Search = () => {
 
-  const [items, setItems] = useState([]);
-  const [search, setSearch] = useState("");
-  const [toggle, setToggle] = useState(false)
+  const APP_ID = "fd252eb4"
+  const APP_KEY = "d4916eb493b2039e2b8fa3f54b096386"
 
+  const [items, setitems] = useState([])
+  const [search, setsearch] = useState("")
+  const [open, setopen] = useState(false)
+  const [dailyfood, setdailyfood] = useState([])
+  const [sugarTotal, setsugarTotal] = useState(0)
 
-  const getItems = () =>{
-    getNutrition();
-    setToggle(true)
-  }
-
-  const getNutrition = async () => {
+  const getNutrition = async () =>{
     const response = await fetch (
-      `https://api.nutritionix.com/v1_1/search/${search}?results=0:20&fields=item_name,brand_name,item_id,nf_calories,nf_protien,nf_sugars,nf_total_fat,nf_total_carbohydrate&appId=${APP_ID}&appKey=${APP_KEY}`
+      `https://api.nutritionix.com/v1_1/search/${search}?results=0:5&fields=item_name,brand_name,item_id,nf_calories,nf_protein,nf_sugars, nf_total_fat,nf_total_carbohydrate,nf_saturated_fat,nf_serving_weight_grams&appId=${APP_ID}&appKey=${APP_KEY}`
     );
-    const data = await response.json();
-    setItems(data.hits)
-    console.log(data.hits)
+      const data = await response.json();
+      setitems(data.hits)
+      console.log(data.hits)
   }
 
-  const updateSearch = e =>{
-    setSearch(e.target.value)
-    console.log(search)
+  const getSearch = e =>{
+    setsearch(e.target.value)
+  }
+
+  const updateSearch = () =>{
+    getNutrition()
+    setopen(true)
+  }
+
+  const toggleOpen = () =>{
+    setopen(false)
+  }
+
+  const showFood =()=>{
+    console.log(dailyfood)
+  }
+
+  const addNutrition =()=>{
+    console.log(dailyfood)
+    dailyfood.map(x => setsugarTotal(Math.floor(x.nf_sugars)))
   }
 
 
-  return(
-    <div className="app">
-      <input 
-        className="search_box" type="text" 
-        value={search} onChange={updateSearch}
-      />
-      <button 
-        className="search_btn" onClick={getItems}
-        >Search
-      </button>
-      <div className={toggle?"search_results":"no_search_box"}>
-      {items.map((x, i) =>(
-          <Info 
-            key={i}
-            title={x.fields.item_name}
-            cals={x.fields.nf_calories}
-            carbs={x.fields.nf_total_carbohydrate}
-            sugar={x.fields.nf_sugars}
-            fat={x.fields.nf_total_fat}
-            brand={x.fields.brand_name}
-            items={items}
-            increment={i}
-          />
-      ))}
+  return (
+    <div className="search"> 
+      <div className="searching">
+        <input className="search_bar" type="text" placeholder="Search..." onChange={getSearch}/>
+        <div>
+          <button className="search_btn" onClick={updateSearch}>Search!</button>
+          <button className="search_btn" onClick={toggleOpen}>Close!</button>
+        </div>
       </div>
-    <div>
-        <Stats 
-          
-        />
+      <div className={open?"open":"close"}>
+        {items.map((x,i) => (
+          <div className="items" key={i}>
+            <h5>
+              <span 
+                className="title">
+                {x.fields.item_name}
+              </span>
+                ({x.fields.brand_name}) {Math.floor(x.fields.nf_calories)}kal  
+              <span 
+                className={x.fields.nf_serving_weight_grams != null?"grams":"hide_grams"}>
+                (per {x.fields.nf_serving_weight_grams} grams)
+              </span>
+              <button 
+                onClick={() => {setdailyfood(dailyfood => dailyfood.concat(x.fields)); addNutrition();}}
+                className="add_food">Add Food
+              </button>
+            </h5>
+          </div>
+        ))}
+      </div>
+          <button onClick={showFood}>show Food</button>
+          <button onClick={()=> console.log(sugarTotal)}>showSugar TOtal</button>
+        <div>
+           {dailyfood.map(x =>(
+            <Stats
+              sugar={x.nf_sugars}
+              cals={x.nf_calories}
+              carbs={x.nf_total_carbohydrate}
+              protien={x.nf_protein}
+              fat={x.nf_total_fat}
+              satFat={x.nf_saturated_fat}
+              serving={x.nf_serving_weight_grams}
+              dailySugar={sugarTotal}
+            />
+          ))} 
+        </div>
     </div>
-  </div>
-)
+  )
 }
+
+
+
 
 export default Search
