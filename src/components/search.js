@@ -40,9 +40,9 @@ export const Search = () => {
     console.log(dailyfood)
   }
 
-  const addNutrition =()=>{
+  const addNutrition = (n)=>{
     console.log(dailyfood)
-    dailyfood.map(x => setsugarTotal(Math.floor(x.nf_sugars)))
+    setsugarTotal(Math.floor(n))
   }
 
 
@@ -69,7 +69,7 @@ export const Search = () => {
                 (per {x.fields.nf_serving_weight_grams} grams)
               </span>
               <button 
-                onClick={() => {setdailyfood(dailyfood => dailyfood.concat(x.fields)); addNutrition();}}
+                onClick={async() =>  {setdailyfood(dailyfood => dailyfood.concat(x.fields));   addNutrition(x.fields.nf_sugars);}}
                 className="add_food">Add Food
               </button>
             </h5>
@@ -79,18 +79,19 @@ export const Search = () => {
           <button onClick={showFood}>show Food</button>
           <button onClick={()=> console.log(sugarTotal)}>showSugar TOtal</button>
         <div>
-           {dailyfood.map(x =>(
+          
             <Stats
-              sugar={x.nf_sugars}
-              cals={x.nf_calories}
-              carbs={x.nf_total_carbohydrate}
-              protien={x.nf_protein}
-              fat={x.nf_total_fat}
-              satFat={x.nf_saturated_fat}
-              serving={x.nf_serving_weight_grams}
+              // sugar={x.nf_sugars}
+              // cals={x.nf_calories}
+              // carbs={x.nf_total_carbohydrate}
+              // protien={x.nf_protein}
+              // fat={x.nf_total_fat}
+              // satFat={x.nf_saturated_fat}
+              // serving={x.nf_serving_weight_grams}
+              dailyfood={dailyfood}
               dailySugar={sugarTotal}
             />
-          ))} 
+       
         </div>
     </div>
   )

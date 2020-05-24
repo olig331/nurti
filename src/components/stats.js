@@ -1,10 +1,10 @@
 import React from 'react'
 
-export const Stats = ({sugar, then, dailySugar, cals, carbs, protien, satFat, fat, serving}) => {
+export const Stats = ({sugar, then, dailySugar,dailyfood, cals, carbs, protien, satFat, fat, serving}) => {
   return (
     <div>
         <div>
-          <h5>Actual Total = {dailySugar}</h5>
+           <h5>Actual Total = {dailySugar}</h5> 
           {/* <h5>Cals {cals}</h5>
           <h5>Saturated Fat {satFat}</h5>
           <h5>Fat {fat}</h5>
