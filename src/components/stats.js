@@ -1,17 +1,14 @@
 import React from 'react'
 
-export const Stats = ({sugar, then, dailySugar,dailyfood, cals, carbs, protien, satFat, fat, serving}) => {
+export const Stats = ({sugarTotal, calsTotal, carbsTotal, proteinTotal, satFatTotal, fatTotal}) => {
   return (
     <div>
-        <div>
-           <h5>Actual Total = {dailySugar}</h5> 
-          {/* <h5>Cals {cals}</h5>
-          <h5>Saturated Fat {satFat}</h5>
-          <h5>Fat {fat}</h5>
-          <h5>Portion {serving}</h5>
-          <h5>Protien {protien}</h5>
-          <h5>Carbs {carbs}</h5> */}
-        </div>
+        <h5>Calories: {calsTotal}kal - 2500kal</h5>
+        <h5>Sugar: {sugarTotal}g - 120g</h5> 
+        <h5>Saturated Fat: {satFatTotal}g - 30g</h5>
+        <h5>Fat: {fatTotal}g - 95g</h5>
+        <h5>Protien: {proteinTotal}g - 55g</h5>
+        <h5>Carbs: {carbsTotal}g - 300g</h5>
     </div>
   )
 }
