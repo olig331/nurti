@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import Stats from './stats'
+import {FaPlus} from 'react-icons/fa'
 
 import '../style.css'
 
@@ -23,6 +24,12 @@ export const Search = () => {
     const data = localStorage.getItem("dailyFood")
       if(data){
         setdailyfood(JSON.parse(data))
+        setsugarTotal(JSON.parse(localStorage.getItem("sugar")))
+        setcaloriesTotal(JSON.parse(localStorage.getItem("cals")))
+        setfatTotal(JSON.parse(localStorage.getItem("fat")))
+        setsatFatTotal(JSON.parse(localStorage.getItem("satFat")))
+        setproteinTotal(JSON.parse(localStorage.getItem("protein")))
+        setcarbsTotal(JSON.parse(localStorage.getItem("carbs")))
       }
   }, [])
 
@@ -71,6 +78,17 @@ export const Search = () => {
 
   return (
     <div className="search"> 
+      <div>
+            <Stats
+              calsTotal={caloriesTotal}
+              carbsTotal={carbsTotal}
+              proteinTotal={proteinTotal}
+              fatTotal={fatTotal}
+              satFatTotal={satFatTotal}
+              dailyfood={dailyfood}
+              sugarTotal={sugarTotal}
+            />
+      </div>
       <div className="searching">
         <input className="search_bar" type="text" placeholder="Search..." onChange={getSearch}/>
         <div>
@@ -84,32 +102,21 @@ export const Search = () => {
             <h5>
               <span 
                 className="title">
-                {x.fields.item_name}
+                {x.fields.item_name}{' '}
               </span>
-                ({x.fields.brand_name}) {Math.floor(x.fields.nf_calories)}kal  
+                 ({x.fields.brand_name}) {Math.floor(x.fields.nf_calories)}kal  
               <span 
                 className={x.fields.nf_serving_weight_grams != null?"grams":"hide_grams"}>
                 (per {x.fields.nf_serving_weight_grams} grams)
               </span>
               <button 
-                onClick={() => {addNutrition(x.fields);}}
-                className="add_food">Add Food
+                onClick={() => {addNutrition(x.fields)}}
+                className="add_food"><FaPlus />
               </button>
             </h5>
           </div>
         ))}
       </div>
-        <div>
-            <Stats
-              calsTotal={caloriesTotal}
-              carbsTotal={carbsTotal}
-              proteinTotal={proteinTotal}
-              fatTotal={fatTotal}
-              satFatTotal={satFatTotal}
-              dailyfood={dailyfood}
-              sugarTotal={sugarTotal}
-            />
-        </div>
     </div>
   )
 }

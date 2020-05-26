@@ -4,19 +4,31 @@
 }
 
 .items{
+  color: whitesmoke;
   border: 3px solid teal;
-  background-color:salmon;
+  background-color:rgb(75, 75, 75);
   padding-left: 10px;
-  width: 50%;
+  width: 490px;
   text-align: center;
+  margin: 1rem auto;
 }
 .add_food{
   margin-bottom: 10px;
-  border-radius: 1em;
-  background-color: skyblue;
+  border-radius: 50%;
+  background-color: rgb(36, 36, 36);
   border: none;
-  padding: 10px 20px 10px 15px;
+  padding: 15px;
   margin-left: 1rem;
+  display: inline-flex;
+  justify-items: center;
+  color: white;
+  opacity: 0.8;
+  &:hover{
+    transition: .2s ease-in-out;
+    transform: scale(0.96);
+    background-color: rgb(49, 199, 49);
+    color: rgb(36, 36, 36);
+  }
 }
 .open{
   transition: 0.5s ease-in-out;
@@ -26,14 +38,14 @@
 }
 .close{
   transition: 1s, ease-in-out;
-  margin-left: -300px;
+  margin: 0 auto;
   width: 0;
   height: 0;
   overflow: hidden;
 }
 .title{
   font-size: 15px;
-  color: darkmagenta;
+  color: rgb(250, 156, 171);
 }
 .grams{
   margin-left: 0.5rem;
@@ -67,4 +79,27 @@
 }
 .search{
   text-align: center;
+}
+.stats{
+  display: inline-flex;
+  padding: 20px;
+  color:rgb(39, 39, 39);
+  h5{
+    margin: 15px;
+    padding: 10px;
+  }
+}
+
+.progress-bar{
+  margin: 0 auto;
+  height: 5px;
+  width: 75%;
+  border-radius: 1em;
+  border: 1px solid rgb(209, 209, 209);
+}
+.filler{
+  background:rgb(54, 54, 197);
+  height: 100%;
+  border-radius: inherit;
+  transition: width .3s ease-in;
 }
