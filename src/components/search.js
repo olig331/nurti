@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Stats from './stats'
 
 import '../style.css'
@@ -19,6 +19,22 @@ export const Search = () => {
   const [satFatTotal, setsatFatTotal] = useState(0)
   const [fatTotal, setfatTotal] = useState(0)
 
+  React.useEffect(() => {
+    const data = localStorage.getItem("dailyFood")
+      if(data){
+        setdailyfood(JSON.parse(data))
+      }
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem("dailyFood", JSON.stringify(dailyfood))  
+    localStorage.setItem("sugar", JSON.stringify(sugarTotal))
+    localStorage.setItem("cals", JSON.stringify(caloriesTotal))
+    localStorage.setItem("protein", JSON.stringify(proteinTotal))
+    localStorage.setItem("carbs", JSON.stringify(carbsTotal))
+    localStorage.setItem("satFat", JSON.stringify(satFatTotal))
+    localStorage.setItem("fat", JSON.stringify(fatTotal))
+  }, [dailyfood, sugarTotal, caloriesTotal, proteinTotal, carbsTotal, satFatTotal, fatTotal])
 
   const getNutrition = async () =>{
     const response = await fetch (
@@ -42,8 +58,9 @@ export const Search = () => {
     setopen(false)
   }
 
-  const addNutrition = (n)=>{
-    setsugarTotal(Math.floor(sugarTotal + n.nf_sugars))
+  const addNutrition = async (n)=>{
+    setdailyfood(dailyfood => dailyfood.concat(n))
+    setsugarTotal(Math.floor(sugarTotal + n.nf_sugars)) 
     setproteinTotal(Math.floor(proteinTotal + n.nf_protein))
     setcaloriesTotal(Math.floor(caloriesTotal + n.nf_calories))
     setcarbsTotal(Math.floor(carbsTotal + n.nf_total_carbohydrate))
@@ -75,7 +92,7 @@ export const Search = () => {
                 (per {x.fields.nf_serving_weight_grams} grams)
               </span>
               <button 
-                onClick={async() =>  {setdailyfood(dailyfood => dailyfood.concat(x.fields));   addNutrition(x.fields);}}
+                onClick={() => {addNutrition(x.fields);}}
                 className="add_food">Add Food
               </button>
             </h5>
