@@ -19,6 +19,61 @@ export const Search = () => {
   const [carbsTotal, setcarbsTotal] = useState(0)
   const [satFatTotal, setsatFatTotal] = useState(0)
   const [fatTotal, setfatTotal] = useState(0)
+  const [grams, setgrams] = useState("")
+  const [foodHistory, setfoodHistory] = useState([])
+  const [tomorrowDate, settomorrowDate] = useState(new Date().toLocaleDateString())
+
+
+  
+  React.useEffect(()=>{
+    let today = new Date().toLocaleDateString();
+      console.log(today)
+      if(today === tomorrowDate){
+         const asd = new Date()
+         const lastDay = new Date(asd)
+         lastDay.setDate(lastDay.getDate() - 1)
+      
+        
+          setfoodHistory(foodHistory => foodHistory.concat( 
+          lastDay.toLocaleDateString(),
+          JSON.parse(localStorage.getItem("sugar")), 
+          JSON.parse(localStorage.getItem("cals")),
+          JSON.parse(localStorage.getItem("fat")),
+          JSON.parse(localStorage.getItem("satFat")),
+          JSON.parse(localStorage.getItem("protein")),
+          JSON.parse(localStorage.getItem("carbs")),
+          JSON.parse(localStorage.getItem("dailyFood"))
+        ))
+            setdailyfood([])
+            setproteinTotal(0)
+            setsugarTotal(0)
+            setsatFatTotal(0)
+            setfatTotal(0)
+            setcarbsTotal(0)
+            setcaloriesTotal(0)
+            localStorage.removeItem("sugar")
+            localStorage.removeItem("cals")
+            localStorage.removeItem("fat")
+            localStorage.removeItem("satFat")
+            localStorage.removeItem("protein")
+            localStorage.removeItem("carbs")
+            localStorage.removeItem("dailyFood")
+          
+           const fff = new Date()
+           const nextDay = new Date(fff)
+           nextDay.setDate(nextDay.getDate() + 1)
+           settomorrowDate(nextDay.toLocaleDateString())
+      };
+
+  },[tomorrowDate])
+  
+  // const tomorrow = () => {
+  //   const today = new Date()
+  //   const nextDay = new Date(today)
+  //   nextDay.setDate(nextDay.getDate() + 1).toLocaleDateString()
+  //   settomorrowDate(nextDay)
+  // } 
+
 
   React.useEffect(() => {
     const data = localStorage.getItem("dailyFood")
@@ -45,15 +100,18 @@ export const Search = () => {
 
   const getNutrition = async () =>{
     const response = await fetch (
-      `https://api.nutritionix.com/v1_1/search/${search}?results=0:5&fields=item_name,brand_name,item_id,nf_calories,nf_protein,nf_sugars,nf_total_fat,nf_total_carbohydrate,nf_saturated_fat,nf_serving_weight_grams&appId=${APP_ID}&appKey=${APP_KEY}`
+      `https://api.nutritionix.com/v1_1/search/${search}?results=0:10&fields=item_name,brand_name,item_id,nf_calories,nf_protein,nf_sugars,nf_total_fat,nf_total_carbohydrate,nf_saturated_fat,nf_serving_weight_grams&appId=${APP_ID}&appKey=${APP_KEY}`
     );
       const data = await response.json();
       setitems(data.hits)
       console.log(data.hits)
+      localStorage.setItem("history", JSON.stringify(foodHistory))
   }
 
   const getSearch = e =>{
     setsearch(e.target.value)
+    console.log(tomorrowDate)
+    console.log(foodHistory)
   }
 
   const updateSearch = () =>{
@@ -66,7 +124,7 @@ export const Search = () => {
   }
 
   const addNutrition = async (n)=>{
-    setdailyfood(dailyfood => dailyfood.concat(n))
+    setdailyfood(dailyfood => dailyfood.concat(n.item_name))
     setsugarTotal(Math.floor(sugarTotal + n.nf_sugars)) 
     setproteinTotal(Math.floor(proteinTotal + n.nf_protein))
     setcaloriesTotal(Math.floor(caloriesTotal + n.nf_calories))
@@ -75,19 +133,34 @@ export const Search = () => {
     setfatTotal(Math.floor(fatTotal + n.nf_total_fat))
   }
 
+  const customNutrition = (y) =>{
+    setdailyfood(dailyfood => dailyfood.concat(y.item_name))
+    setsugarTotal(Math.floor(sugarTotal + ((y.nf_sugars / y.nf_serving_weight_grams)*grams)))
+    setproteinTotal(Math.floor(proteinTotal + ((y.nf_protein / y.nf_serving_weight_grams)*grams)))
+    setcaloriesTotal(Math.floor(caloriesTotal + ((y.nf_calories / y.nf_serving_weight_grams)*grams)))
+    setcarbsTotal(Math.floor(carbsTotal + ((y.nf_total_carbohydrate / y.nf_serving_weight_grams)*grams)))
+    setsatFatTotal(Math.floor(satFatTotal + ((y.nf_saturated_fat / y.nf_serving_weight_grams)*grams)))
+    setfatTotal(Math.floor(fatTotal + ((y.nf_total_fat / y.nf_serving_weight_grams)*grams)))
+  }
 
+  const settingGrams = (event) =>{
+    setgrams(event.target.value)
+  }
+
+
+  
   return (
     <div className="search"> 
       <div>
-            <Stats
-              calsTotal={caloriesTotal}
-              carbsTotal={carbsTotal}
-              proteinTotal={proteinTotal}
-              fatTotal={fatTotal}
-              satFatTotal={satFatTotal}
-              dailyfood={dailyfood}
-              sugarTotal={sugarTotal}
-            />
+        <Stats
+          calsTotal={caloriesTotal}
+          carbsTotal={carbsTotal}
+          proteinTotal={proteinTotal}
+          fatTotal={fatTotal}
+          satFatTotal={satFatTotal}
+          dailyfood={dailyfood}
+          sugarTotal={sugarTotal}
+        />
       </div>
       <div className="searching">
         <input className="search_bar" type="text" placeholder="Search..." onChange={getSearch}/>
@@ -106,21 +179,47 @@ export const Search = () => {
               </span>
                  ({x.fields.brand_name}) {Math.floor(x.fields.nf_calories)}kal  
               <span 
-                className={x.fields.nf_serving_weight_grams != null?"grams":"hide_grams"}>
+                className={x.fields.nf_serving_weight_grams != null
+                ?"grams"
+                :"hide_grams"}
+                >
                 (per {x.fields.nf_serving_weight_grams} grams)
               </span>
+            
               <button 
                 onClick={() => {addNutrition(x.fields)}}
-                className="add_food"><FaPlus />
+                className="add_food">
+                <FaPlus />
               </button>
+              
+                <div 
+                  className={x.fields.nf_serving_weight_grams !== null
+                  ?"input_text"
+                  :"no_input"}
+                >
+                  <span 
+                    className="white">Enter Custom Weight: {"  "} 
+                  </span>
+                  <input 
+                    className="grams_input" 
+                    type="text" 
+                    placeholder="grams" 
+                    onChange={settingGrams}
+                  />
+                  <button 
+                    className="add_food" 
+                    onClick={() => {customNutrition(x.fields)}}>
+                    <FaPlus />
+                  </button>
+                </div>
             </h5>
           </div>
         ))}
       </div>
+      {/* <button onClick={tomorrow()}>click</button> */}
     </div>
   )
 }
-
 
 
 

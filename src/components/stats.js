@@ -8,8 +8,11 @@ export const Stats = ({sugarTotal, calsTotal, carbsTotal, proteinTotal, satFatTo
   const [caloriesPercent, setcaloriesPercent] = useState(0)
   const [fatPercent, setfatPercent] = useState(0)
   const [satFatPercent, setsatFatPercent] = useState(0)
+  const [currentDate, setcurrentDate] = useState("")
+
 
   useEffect(()=>{
+    setcurrentDate(new Date().toLocaleDateString())
     setcaloriesPercent((calsTotal/2500)*100)
     setsugarPercent((sugarTotal/120)*100)
     setcarbsPercent((carbsTotal/300)*100)
@@ -36,6 +39,7 @@ export const Stats = ({sugarTotal, calsTotal, carbsTotal, proteinTotal, satFatTo
       />
     )
   }
+  
 
   return (
     <div>
@@ -45,7 +49,8 @@ export const Stats = ({sugarTotal, calsTotal, carbsTotal, proteinTotal, satFatTo
           <ProgressBar percent={caloriesPercent}/>
         </div>
         <div>
-            <h5>Sugar: {sugarTotal}g - 120g</h5>
+            <h5>{`Sugar: 
+              ${sugarTotal}g - 120g`}</h5>
             <ProgressBar percent={sugarPercent} />
         </div>
         <div>
@@ -65,6 +70,7 @@ export const Stats = ({sugarTotal, calsTotal, carbsTotal, proteinTotal, satFatTo
           <ProgressBar percent={carbsPercent}/>
         </div>
       </div>
+        <h5>{currentDate}</h5>
     </div>
   )
 }
