@@ -174,3 +174,30 @@
   font-size: 17px;
 }
 
+//////////// SET UP PAGE CSS /////////////////
+
+.welcome{
+  transition: 2s ease-in-out;
+  position: relative;
+  text-align: center;
+  margin: 30% auto 0 auto;
+  font-size: 2rem;
+  span{
+    font-size: 4rem;
+    &:hover{
+      transition: 0.2s ease-in-out;
+      color: rgb(230, 224, 224);
+    }
+  }
+}
+.welcome_clicked{
+  position: relative;
+  transition: 2s ease-in-out;
+  margin-left: -1000px;
+}
+
+.personal_info{
+  display: none;
+  text-align: center;
+  margin: -4rem auto;
+}
