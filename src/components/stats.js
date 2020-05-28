@@ -1,6 +1,6 @@
 import React,{useState, useEffect} from 'react'
 
-export const Stats = ({sugarTotal, calsTotal, carbsTotal, proteinTotal, satFatTotal, fatTotal}) => {
+export const Stats = ({dailyfood, sugarTotal, calsTotal, carbsTotal, proteinTotal, satFatTotal, fatTotal}) => {
 
   const [sugarPercent, setsugarPercent] = useState(0)
   const [carbsPercent, setcarbsPercent] = useState(0)
@@ -8,11 +8,8 @@ export const Stats = ({sugarTotal, calsTotal, carbsTotal, proteinTotal, satFatTo
   const [caloriesPercent, setcaloriesPercent] = useState(0)
   const [fatPercent, setfatPercent] = useState(0)
   const [satFatPercent, setsatFatPercent] = useState(0)
-  const [currentDate, setcurrentDate] = useState("")
-
 
   useEffect(()=>{
-    setcurrentDate(new Date().toLocaleDateString())
     setcaloriesPercent((calsTotal/2500)*100)
     setsugarPercent((sugarTotal/120)*100)
     setcarbsPercent((carbsTotal/300)*100)
@@ -43,6 +40,7 @@ export const Stats = ({sugarTotal, calsTotal, carbsTotal, proteinTotal, satFatTo
 
   return (
     <div>
+      <h3 className="date">{new Date().toDateString()}</h3>
       <div className="stats">
         <div>
           <h5>Calories: {calsTotal}kal - 2500kal</h5>
@@ -70,7 +68,14 @@ export const Stats = ({sugarTotal, calsTotal, carbsTotal, proteinTotal, satFatTo
           <ProgressBar percent={carbsPercent}/>
         </div>
       </div>
-        <h5>{currentDate}</h5>
+        <div className="foods_shadow">
+          <h4 style={{color: "rgb(53,52,52)"}}>Todays Food:</h4>
+        <div className="foods">
+          {dailyfood.map((z, i) =>(
+            <h5 style={{color: "rgb(53, 52, 52)"}} key={i}><span className="accent">{i+1}:</span> {z}</h5>
+          ))}
+        </div>
+        </div>
     </div>
   )
 }

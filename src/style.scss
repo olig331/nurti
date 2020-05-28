@@ -3,6 +3,10 @@
 
 }
 
+.date{
+  color: #333;
+}
+
 .items{
   color: whitesmoke;
   border: 3px solid teal;
@@ -85,14 +89,35 @@
   text-align: center;
 }
 .stats{
-  display: inline-block;
-  padding: 20px;
-  width: 219px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+  margin-bottom: 2rem;
+  min-width: 200px;
   color:rgb(39, 39, 39);
+  box-shadow:5px 4px 20px rgb(252, 229, 186);
   h5{
     margin: 15px;
     padding: 10px;
   }
+}
+
+.foods{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  h5{
+    padding-left: 2rem;
+  }
+}
+
+.foods_shadow{
+  box-shadow:3px 4px 20px silver;
+  padding-top: 1rem;
 }
 
 .progress-bar{
@@ -144,3 +169,8 @@
   font-size: 17;
   color: whitesmoke;
 }
+.accent{
+  color:purple;
+  font-size: 17px;
+}
+
