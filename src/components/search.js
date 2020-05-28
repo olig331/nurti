@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect } from 'react'
+
 import Stats from './stats'
 import {FaPlus} from 'react-icons/fa'
 
@@ -21,61 +22,60 @@ export const Search = () => {
   const [fatTotal, setfatTotal] = useState(0)
   const [grams, setgrams] = useState("")
   const [foodHistory, setfoodHistory] = useState([])
-  const [tomorrowDate, settomorrowDate] = useState(new Date().toLocaleDateString())
 
-
-  
-  React.useEffect(()=>{
-    let today = new Date().toLocaleDateString();
-      console.log(today)
-      if(today === tomorrowDate){
-         const asd = new Date()
-         const lastDay = new Date(asd)
-         lastDay.setDate(lastDay.getDate() - 1)
-      
-        
-          setfoodHistory(foodHistory => foodHistory.concat( 
-          lastDay.toLocaleDateString(),
-          JSON.parse(localStorage.getItem("sugar")), 
-          JSON.parse(localStorage.getItem("cals")),
-          JSON.parse(localStorage.getItem("fat")),
-          JSON.parse(localStorage.getItem("satFat")),
-          JSON.parse(localStorage.getItem("protein")),
-          JSON.parse(localStorage.getItem("carbs")),
-          JSON.parse(localStorage.getItem("dailyFood"))
-        ))
-            setdailyfood([])
-            setproteinTotal(0)
-            setsugarTotal(0)
-            setsatFatTotal(0)
-            setfatTotal(0)
-            setcarbsTotal(0)
-            setcaloriesTotal(0)
-            localStorage.removeItem("sugar")
-            localStorage.removeItem("cals")
-            localStorage.removeItem("fat")
-            localStorage.removeItem("satFat")
-            localStorage.removeItem("protein")
-            localStorage.removeItem("carbs")
-            localStorage.removeItem("dailyFood")
+    const setDateUpdateProccess = () =>{
+      console.log("hello")
+      var today  = new Date().toDateString()
+      var storedDate = JSON.parse(localStorage.getItem("date"))
+      if(today !== storedDate){
+        console.log("dates not equal")
+        setfoodHistory(foodHistory => foodHistory.concat( 
+        today,
+        JSON.parse(localStorage.getItem("sugar")), 
+        JSON.parse(localStorage.getItem("cals")),
+        JSON.parse(localStorage.getItem("fat")),
+        JSON.parse(localStorage.getItem("satFat")),
+        JSON.parse(localStorage.getItem("protein")),
+        JSON.parse(localStorage.getItem("carbs")),
+        JSON.parse(localStorage.getItem("dailyFood"))
+      ))
+          setdailyfood([])
+          setproteinTotal(0)
+          setsugarTotal(0)
+          setsatFatTotal(0)
+          setfatTotal(0)
+          setcarbsTotal(0)
+          setcaloriesTotal(0)
+          localStorage.removeItem("sugar")
+          localStorage.removeItem("cals")
+          localStorage.removeItem("fat")
+          localStorage.removeItem("satFat")
+          localStorage.removeItem("protein")
+          localStorage.removeItem("carbs")
+          localStorage.removeItem("dailyFood")
           
-           const fff = new Date()
-           const nextDay = new Date(fff)
-           nextDay.setDate(nextDay.getDate() + 1)
-           settomorrowDate(nextDay.toLocaleDateString())
-      };
+          localStorage.setItem("date", JSON.stringify(new Date().toDateString()))
+    };
+  }
 
-  },[tomorrowDate])
+
+  const useTime = (refreshCycle = 4000) =>{
+    
+    useEffect(() => {
+      var intervalId = setInterval(
+        setDateUpdateProccess,
+        refreshCycle,
+      );
+    
+
+      return () => clearInterval(intervalId)
   
-  // const tomorrow = () => {
-  //   const today = new Date()
-  //   const nextDay = new Date(today)
-  //   nextDay.setDate(nextDay.getDate() + 1).toLocaleDateString()
-  //   settomorrowDate(nextDay)
-  // } 
+    },[refreshCycle,]);
+  }
+  
+    useTime()
 
-
-  React.useEffect(() => {
+    useEffect(() => {
     const data = localStorage.getItem("dailyFood")
       if(data){
         setdailyfood(JSON.parse(data))
@@ -110,8 +110,6 @@ export const Search = () => {
 
   const getSearch = e =>{
     setsearch(e.target.value)
-    console.log(tomorrowDate)
-    console.log(foodHistory)
   }
 
   const updateSearch = () =>{
@@ -216,7 +214,6 @@ export const Search = () => {
           </div>
         ))}
       </div>
-      {/* <button onClick={tomorrow()}>click</button> */}
     </div>
   )
 }
