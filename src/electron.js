@@ -7,6 +7,8 @@ function createWindow () {
   const win = new BrowserWindow({
     width: 1124,
     height: 900,
+    title: "Nutri",
+    resizable:"false",
     webPreferences: {
       nodeIntegration: true
     }

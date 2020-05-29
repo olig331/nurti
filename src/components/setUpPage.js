@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import {FaRegArrowAltCircleRight,FaRegArrowAltCircleLeft, FaFemale} from 'react-icons/fa'
 import {IoIosMan} from 'react-icons/io'
-import {Search} from './search'
 
 
 export const SetUpPage = ({setup}) => {
@@ -31,7 +30,7 @@ export const SetUpPage = ({setup}) => {
   } 
 
   const finished = () =>{
-    
+    console.log("hello")
   }
 
   return (
@@ -43,13 +42,18 @@ export const SetUpPage = ({setup}) => {
             setarrowClicked(true)
           }}><FaRegArrowAltCircleRight /></span>
         </div>
-        <div className={arrowClicked && finalPage == false?"personal_info":"personal_info_hidden"}>
+        <div className={arrowClicked && finalPage === false?"personal_info":"personal_info_hidden"}>
           <div className="gender">
             <h4>Select Gender:</h4>
-            <span className={gender == "male"?"radio_highlight":"nothing"} onClick={()=>{
-              setgender("male")
-            }}><IoIosMan /></span>{`  `}
-            <span className={gender == "female"?"radio_highlight":"nothing"} onClick={()=>{
+            <span className={gender === "male"
+              ?"radio_highlight"
+              :"nothing"} 
+              onClick={()=>{
+                setgender("male")
+              }}>
+                <IoIosMan />
+          </span>{`  `}
+            <span className={gender === "female"?"radio_highlight":"nothing"} onClick={()=>{
               setgender("female")
             }}><FaFemale /></span>
           </div>
@@ -60,14 +64,14 @@ export const SetUpPage = ({setup}) => {
               <div className="weight">
                 <h4>Enter Weight:</h4>
                   <span 
-                    className={weight =="KG"?"radio_highlight":"nothing"} 
+                    className={weight ==="KG"?"radio_highlight":"nothing"} 
                     onClick={()=>{
                     setweight("KG")
                     }}
                     type="radio">KG
                   </span>{`  `}
                   <span 
-                    className={weight == "LB"?"radio_highlight":"nothing"} onClick={()=>{
+                    className={weight === "LB"?"radio_highlight":"nothing"} onClick={()=>{
                     setweight("LB")
                     }} 
                     type="radio">LB
@@ -75,9 +79,9 @@ export const SetUpPage = ({setup}) => {
                   <input 
                     onChange={getWeightNum} 
                     type="text" 
-                    placeholder={weight == ""
+                    placeholder={weight === ""
                     ?"Enter..."
-                    :weight =="LB"?"lbs...":"Kg..."}
+                    :weight ==="LB"?"lbs...":"Kg..."}
                   />
               </div>
               <div
@@ -119,7 +123,7 @@ export const SetUpPage = ({setup}) => {
             Maintain
           </span>
           <div 
-            className={goal == "Gain" || goal == "Lose"
+            className={goal === "Gain" || goal === "Lose"
             ?"slider_show"
             :"slider_hide"}
           >
@@ -132,14 +136,14 @@ export const SetUpPage = ({setup}) => {
               className="slider"
             /><br/>
             <label  
-              for="range_selecter">{sliderVal}{sliderVal<=1?"lb a week":"lbs a week" }
+              htmlFor="range_selecter">{sliderVal}{sliderVal<=1?"lb a week":"lbs a week" }
             </label>
           </div> 
         </div>
           <div className={goal !== ""?"finish_btn_div":"final_page_hidden"}>
             <button 
               onClick={()=>{
-                finished
+                finished();
                 setup()
               }}
               className="finish_btn">
