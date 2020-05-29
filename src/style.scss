@@ -202,20 +202,144 @@
   margin-top: -7rem;
   font-size: 2rem;
   span{
+    cursor: pointer;
     font-size: 4rem;
-    margin-left: 25px;
+    min-width: 66px;
     padding: 5px;
     border: 1px solid white;
     border-radius: 5px;
-
+    &:hover{
+      box-shadow: 2px 4px 15px rgb(209, 206, 206);
+    }
+  }
+  input{
+    cursor: pointer;
+    width: 80px;
+    height: 25px;
+    text-align: center;
+    border: 1px solid whitesmoke;
+    background-color: none;
+    &:focus{
+      outline: solid  teal;
+      outline-offset: 4px;
+    }
   }
 }
 
 .radio_highlight{
   background-color: green;
   color: white;
+  margin: 0;
 }
 
 .nothing{
   color: black
+}
+
+.weight{
+  margin: 0 auto;
+  border: 2px solid wheat;
+  padding-bottom: 20px;
+  width: 40%;
+  box-shadow: 2px 8px 20px rgb(209, 206, 206);
+  span{
+    cursor: pointer;
+    font-size: 2.3rem;
+    width: 66px;
+  }
+}
+
+.gender{
+  margin: 0 auto;
+  border: 2px solid wheat;
+  padding-bottom: 20px;
+  width: 40%;
+  margin-bottom: 10px;
+  box-shadow: 2px 8px 20px rgb(209, 206, 206);
+}
+.age{
+  margin: 0 auto;
+  border: 2px solid wheat;
+  padding-bottom: 20px;
+  width: 40%;
+  margin-bottom: 10px;
+  box-shadow: 2px 8px 20px rgb(209, 206, 206);
+}
+.btn_to_final_page{
+  width: 10%;
+  margin: 20px auto;
+  text-align: center;
+  font-size: 3rem;
+  &:hover{
+    color: rgb(67, 185, 67);
+    transition: 0.2s ease-in-out;
+    cursor: pointer;
+  }
+}
+.final_page_hidden{
+  display: none;
+}
+
+.final_page_show{
+  text-align: center;
+  margin: 0 auto;
+  border: 2px solid wheat;
+  padding-bottom: 20px;
+  width: 40%;
+  font-size: 2rem;
+  box-shadow: 2px 8px 20px rgb(209, 206, 206);
+  span{
+  cursor: pointer;
+    font-size: 2rem;
+    min-width: 66px;
+    padding: 5px;
+    border: 1px solid white;
+    border-radius: 5px;
+    &:hover{
+      box-shadow: 2px 4px 15px rgb(209, 206, 206);
+    }
+  }
+}
+
+.slider_show{
+  transition: 2s, ease-in-out;
+  color: black;
+}
+
+.slider_hide{
+  display: none;
+  transition: 2s, ease-in-out;
+  margin: -1000px;
+}
+
+.back_arrow{
+  font-size: 3rem;
+  margin: 0 auto;
+  text-align: center;
+  &:hover{
+    transition: 0.2s ease-in-out;
+   color: rgb(231, 80, 80);
+  }
+}
+
+.finish_btn_div{
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.finish_btn{
+  width: 440px;
+  height: 50px;
+  margin: 20px auto;
+  text-align: center;
+  border-radius: 5px;
+  &:hover{
+    background-color: green;
+    box-shadow: 2px 4px 15px rgb(209, 206, 206);
+  }
+  &:focus{
+    outline:solid teal;
+    outline-offset:4px ;
+  }
 }

@@ -1,15 +1,19 @@
 import React, {useState} from 'react'
-import {FaRegArrowAltCircleRight, FaFemale} from 'react-icons/fa'
+import {FaRegArrowAltCircleRight,FaRegArrowAltCircleLeft, FaFemale} from 'react-icons/fa'
 import {IoIosMan} from 'react-icons/io'
+import {Search} from './search'
 
-export const SetUpPage = () => {
+
+export const SetUpPage = ({setup}) => {
   
-  const [complete, setcomplete] = useState(false)
   const [arrowClicked, setarrowClicked] = useState(false)
   const [gender, setgender] = useState("")
   const [weight, setweight] = useState("")
   const [weightNum, setweightNum] = useState(0)
   const [age, setage] = useState (0)
+  const [finalPage, setfinalPage] = useState(false)
+  const [goal, setgoal] = useState("")
+  const [sliderVal, setsliderVal] = useState(2)
 
 
   const getWeightNum = e =>{
@@ -22,6 +26,14 @@ export const SetUpPage = () => {
     console.log(e.target.value)
   }
 
+  const sliderValFunc = e =>{
+    setsliderVal(e.target.value)
+  } 
+
+  const finished = () =>{
+    
+  }
+
   return (
     <div className="set_up_parent">
         <div className={arrowClicked?"welcome_clicked":"welcome"}>
@@ -31,12 +43,12 @@ export const SetUpPage = () => {
             setarrowClicked(true)
           }}><FaRegArrowAltCircleRight /></span>
         </div>
-        <div className={arrowClicked?"personal_info":"personal_info_hidden"}>
-          <div>
+        <div className={arrowClicked && finalPage == false?"personal_info":"personal_info_hidden"}>
+          <div className="gender">
             <h4>Select Gender:</h4>
             <span className={gender == "male"?"radio_highlight":"nothing"} onClick={()=>{
               setgender("male")
-            }}><IoIosMan /></span>
+            }}><IoIosMan /></span>{`  `}
             <span className={gender == "female"?"radio_highlight":"nothing"} onClick={()=>{
               setgender("female")
             }}><FaFemale /></span>
@@ -46,16 +58,94 @@ export const SetUpPage = () => {
                 <input onChange={getAge} type="text" placeholder="Age..."/>
             </div>
               <div className="weight">
-                <h4>Enter Weight in KG</h4>
-                  <button className={weight =="KG"?"radio_highlight":"nothing"} onClick={()=>{
+                <h4>Enter Weight:</h4>
+                  <span 
+                    className={weight =="KG"?"radio_highlight":"nothing"} 
+                    onClick={()=>{
                     setweight("KG")
-                  }}type="radio">KG</button>
-                  <button className={weight == "LBs"?"radio_highlight":"nothing"} onClick={()=>{
-                    setweight("LBs")
-                  }} type="radio">LBs</button><br></br>
-                  <input onChange={getWeightNum} type="text" placeholder={weight == ""?"Enter...":weight =="LBs"?"lbs...":"Kg..."}/>
+                    }}
+                    type="radio">KG
+                  </span>{`  `}
+                  <span 
+                    className={weight == "LB"?"radio_highlight":"nothing"} onClick={()=>{
+                    setweight("LB")
+                    }} 
+                    type="radio">LB
+                  </span><br/>
+                  <input 
+                    onChange={getWeightNum} 
+                    type="text" 
+                    placeholder={weight == ""
+                    ?"Enter..."
+                    :weight =="LB"?"lbs...":"Kg..."}
+                  />
+              </div>
+              <div
+                onClick={()=>{
+                  setfinalPage(true)
+                }} 
+                className="btn_to_final_page">
+                <FaRegArrowAltCircleRight/>
               </div>
         </div>
+          <div className={finalPage?"back_arrow":"final_page_hidden"}><FaRegArrowAltCircleLeft /></div>
+        <div className={finalPage?"final_page_show":"final_page_hidden"}>
+          <h4>Goal:</h4>
+          <span 
+            onClick={()=>{
+              setgoal("Gain")
+            }}
+            className={goal !=="Gain"
+            ?"nothing"
+            :"radio_highlight"}>
+            Gain
+          </span>{` `}
+          <span  
+            onClick={()=>{
+              setgoal("Lose")
+            }}
+            className={goal !=="Lose"
+            ?"nothing"
+            :"radio_highlight"}>
+            Lose
+          </span>{` `}
+          <span  
+            onClick={()=>{
+              setgoal("Maintain")
+            }}
+            className={goal !=="Maintain"
+            ?"nothing"
+            :"radio_highlight"}>   
+            Maintain
+          </span>
+          <div 
+            className={goal == "Gain" || goal == "Lose"
+            ?"slider_show"
+            :"slider_hide"}
+          >
+            <input 
+              name="range_selector" 
+              type="range" step="1" 
+              min={"0"} 
+              max={"2"} 
+              onChange={sliderValFunc} 
+              className="slider"
+            /><br/>
+            <label  
+              for="range_selecter">{sliderVal}{sliderVal<=1?"lb a week":"lbs a week" }
+            </label>
+          </div> 
+        </div>
+          <div className={goal !== ""?"finish_btn_div":"final_page_hidden"}>
+            <button 
+              onClick={()=>{
+                finished
+                setup()
+              }}
+              className="finish_btn">
+              Finish
+            </button>
+          </div>
     </div>
   )
 }

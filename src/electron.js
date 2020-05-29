@@ -5,13 +5,14 @@ const isDev = require("electron-is-dev") // ADD THIS /////////////////////////
 function createWindow () {
   // Create the browser window.
   const win = new BrowserWindow({
-    width: 1024,
-    height: 800,
+    width: 1124,
+    height: 900,
     webPreferences: {
       nodeIntegration: true
     }
   })
 
+  win.setMenu(null)
   // ADD THIs ////////////////////////////////////////////////////
   win.loadURL(
       isDev 
