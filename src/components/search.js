@@ -5,7 +5,7 @@ import {FaPlus} from 'react-icons/fa'
 
 import '../style.css'
 
-export const Search = () => {
+export const Search = ({trackerFunc}) => {
 
   const APP_ID = "fd252eb4"
   const APP_KEY = "d4916eb493b2039e2b8fa3f54b096386"

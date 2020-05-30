@@ -92,7 +92,8 @@ export const SetUpPage = ({setup}) => {
                 <FaRegArrowAltCircleRight/>
               </div>
         </div>
-          <div className={finalPage?"back_arrow":"final_page_hidden"}><FaRegArrowAltCircleLeft /></div>
+          <div className={finalPage?"back_arrow":"final_page_hidden"}
+          onClick={()=>{setfinalPage(false)}}><FaRegArrowAltCircleLeft /></div>
         <div className={finalPage?"final_page_show":"final_page_hidden"}>
           <h4>Goal:</h4>
           <span 

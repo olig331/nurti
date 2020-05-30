@@ -5,24 +5,26 @@ import {FaLightbulb} from 'react-icons/fa'
 
 import '../style.css'
 
-export const Dashbaord = () => {
+export const Dashbaord = ({tipsFunc, settingsFunc, trackerFunc, historyFunc}) => {
+
+
   return (
     <div className="dashboard">
       <h3>Dashboard</h3>
       <div className="inner_dash">
-        <div className="tracker">
+        <div onClick={trackerFunc} className="tracker">
           <BsPencilSquare/>
           <span>Tracker</span>
         </div>
-        <div className="History">
+        <div onClick={historyFunc} className="History">
         <BsCalendar/>
         <span>History</span>
         </div>
-        <div className="settings">
+        <div onClick={settingsFunc} className="settings">
           <GiCog/>
           <span>Settings</span>
         </div>
-        <div className="tips">
+        <div onClick={tipsFunc} className="tips">
           <FaLightbulb name="bulb"/>
           <span>Tips</span>
         </div>
