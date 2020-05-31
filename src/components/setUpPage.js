@@ -30,7 +30,7 @@ export const SetUpPage = ({setup}) => {
   } 
 
   const finished = () =>{
-    console.log("hello")
+    console.log("hello");
   }
 
   return (

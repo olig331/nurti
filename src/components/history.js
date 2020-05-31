@@ -1,9 +1,9 @@
 import React from 'react'
 
-export const History = (historyFunc) => {
+export const History = ({historyFunc}) => {
   return (
     <div>
-      
+      <button onClick={historyFunc}>Dashboard</button>
     </div>
   )
 }

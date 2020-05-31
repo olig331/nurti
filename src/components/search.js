@@ -60,23 +60,20 @@ export const Search = ({trackerFunc}) => {
 
 
   const useTime = (refreshCycle = 4000) =>{
-    
     useEffect(() => {
       var intervalId = setInterval(
         setDateUpdateProccess,
         refreshCycle,
       );
-    
-
       return () => clearInterval(intervalId)
   
     },[refreshCycle,]);
   }
   
-    useTime()
+  useTime()
 
     useEffect(() => {
-    const data = localStorage.getItem("dailyFood")
+      const data = localStorage.getItem("dailyFood")
       if(data){
         setdailyfood(JSON.parse(data))
         setsugarTotal(JSON.parse(localStorage.getItem("sugar")))
@@ -86,7 +83,7 @@ export const Search = ({trackerFunc}) => {
         setproteinTotal(JSON.parse(localStorage.getItem("protein")))
         setcarbsTotal(JSON.parse(localStorage.getItem("carbs")))
       }
-  }, [])
+    }, [])
 
   useEffect(() => {
     localStorage.setItem("dailyFood", JSON.stringify(dailyfood))  
@@ -146,9 +143,9 @@ export const Search = ({trackerFunc}) => {
   }
 
 
-  
   return (
     <div className="search"> 
+      <button onClick={trackerFunc}>Dashboard</button>
       <div>
         <Stats
           calsTotal={caloriesTotal}

@@ -47,7 +47,7 @@ const App = () =>{
   return(
     <div className="App">
       {setUpComplete && tracker === false && history === false 
-        && settings === false &&tips === false
+        && settings === false && tips === false
           ?<Dashbaord 
             tipsFunc={toggleTips} 
             settingsFunc={toggleSettings}
