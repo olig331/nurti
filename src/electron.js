@@ -1,6 +1,7 @@
 const { app, BrowserWindow } = require('electron')
 const path = require("path")    // ADD THIS ////////////////////////////////
 const isDev = require("electron-is-dev") // ADD THIS /////////////////////////
+// const globalShortcut = electron.globalShortcut
 
 function createWindow () {
   // Create the browser window.
@@ -13,6 +14,15 @@ function createWindow () {
       nodeIntegration: true
     }
   })
+
+  // globalShortcut.register('f5', function() {
+	// 	console.log('f5 is pressed')
+	// 	mainWindow.reload()
+	// })
+	// globalShortcut.register('CommandOrControl+R', function() {
+	// 	console.log('CommandOrControl+R is pressed')
+	// 	mainWindow.reload()
+	// })
 
   win.setMenu(null)
   // ADD THIs ////////////////////////////////////////////////////

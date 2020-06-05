@@ -9,6 +9,23 @@ export const Stats = ({dailyfood, sugarTotal, calsTotal, carbsTotal, proteinTota
   const [fatPercent, setfatPercent] = useState(0)
   const [satFatPercent, setsatFatPercent] = useState(0)
 
+  const data = JSON.parse(localStorage.getItem("settings"))
+  
+  const relativeStats =()=>{
+    let bmr, weightInKg, heightInCm;
+      heightInCm = Math.ceil(((parseInt(data[3])+ parseInt(data[4])) * 2.54))
+        if(data[1] === "LB"){
+          weightInKg = parseInt(data[2]) / 2.2 
+          weightInKg = weightInKg.toFixed(1)
+        }
+          if(data[0] === "male"){
+            bmr = 88.362 +(13.397 * weightInKg) + (4.799 * heightInCm) - (5.677 * parseInt(data[5]))
+          }else{
+            bmr = 447.593 + (9.247 * weightInKg) + (3.098 * heightInCm) - (4.330 * parseInt(data[5]))
+          }
+      
+  }
+
   useEffect(()=>{
     setcaloriesPercent((calsTotal/2500)*100)
     setsugarPercent((sugarTotal/120)*100)
@@ -40,7 +57,6 @@ export const Stats = ({dailyfood, sugarTotal, calsTotal, carbsTotal, proteinTota
 
   return (
     <div>
-      <h3 className="date">{new Date().toDateString()}</h3>
       <div className="stats">
         <div>
           <h5>Calories: {calsTotal}kal - 2500kal</h5>
@@ -68,14 +84,6 @@ export const Stats = ({dailyfood, sugarTotal, calsTotal, carbsTotal, proteinTota
           <ProgressBar percent={carbsPercent}/>
         </div>
       </div>
-        <div className="foods_shadow">
-          <h4 style={{color: "rgb(53,52,52)"}}>Todays Food:</h4>
-        <div className="foods">
-          {dailyfood.map((z, i) =>(
-            <h5 style={{color: "rgb(53, 52, 52)"}} key={i}><span className="accent">{i+1}:</span> {z}</h5>
-          ))}
-        </div>
-        </div>
     </div>
   )
 }

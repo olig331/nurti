@@ -8,6 +8,7 @@ body {
   background: #3494E6; 
   background: -webkit-linear-gradient(to right, #EC6EAD, #3494E6); 
   background: linear-gradient(to right, #EC6EAD, #3494E6); 
+  box-sizing: border-box;
 }
 
 code {
