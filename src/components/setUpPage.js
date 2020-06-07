@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
-import {FaRegArrowAltCircleRight,FaRegArrowAltCircleLeft, FaFemale} from 'react-icons/fa'
-import {IoIosMan} from 'react-icons/io'
+import {FaRegArrowAltCircleRight} from 'react-icons/fa'
 import SetUpSettings from './SetUpSettings'
 
 
@@ -9,7 +8,7 @@ export const SetUpPage = ({setup}) => {
   const [arrowClicked, setarrowClicked] = useState(false)
 
   return ( 
-    <div className="set_up_parent">
+    <>
       {arrowClicked?<SetUpSettings setup={setup}/>:
       <div className="set_up">
         <div className="welcome">
@@ -20,7 +19,7 @@ export const SetUpPage = ({setup}) => {
           }}><FaRegArrowAltCircleRight /></span>
         </div>
       </div>}
-    </div>
+    </>
   )
 }
 

@@ -12,37 +12,55 @@ export const History = ({historyFunc}) => {
     var newArr = index.split(",")
     return(
     <>
-      <h5>{newArr[0]}</h5>
-      <h5>Sugar: {newArr[1]}</h5>
-      <h5>Calories: {newArr[2]}</h5>
-      <h5>Protein: {newArr[3]}</h5>
-      <h5>Fat: {newArr[4]}</h5>
-      <h5>Saturated Fat: {newArr[5]}</h5>
-      <h5>Carbohydrates: {newArr[6]}</h5>
-      <h5>Foods: {newArr.splice(7, newArr.length -1)}</h5>
+      <div className="sub_macros">
+        <div className="date">
+          <h5>{newArr[0]}</h5>
+        </div>
+        <div className="history_stats">
+          <h5>Sugar: <span>{newArr[1]}</span></h5>
+          <h5>Calories: <span>{newArr[2]}</span></h5>
+          <h5>Protein: <span>{newArr[3]}</span></h5>
+          <h5>Fat: <span>{newArr[4]}</span></h5>
+          <h5>Saturated Fat: <span>{newArr[5]}</span></h5>
+          <h5 className="last">Carbohydrates: <span>{newArr[6]}</span></h5>
+        </div>
+        <div className="history_foods">
+            <p>
+              {newArr.splice(7, newArr.length -1).join(" ||  ")}
+            </p>
+        </div>
+      </div>
     </>
     )
   }
 
   return (
     <div className="history_parent_div">
-      <button onClick={historyFunc}>Dashboard</button><br/>
-      {historyCount === 0
-        ?null
-        :<button 
-          onClick={()=>sethistoryCount(historyCount -1)}
-          ><FaRegArrowAltCircleLeft/>
-        </button>
-      }
-      <div>{helperFunc(data[historyCount])}</div>
-      {historyCount === data.length -1
-        ?null
-        :<button 
-          onClick={()=>sethistoryCount(historyCount +1)}
-          ><FaRegArrowAltCircleRight />
-        </button>
-      }
-        
+      <div className="dash_btn"><button onClick={historyFunc}><FaRegArrowAltCircleLeft/></button></div>
+      <div className="prev_day">
+        {historyCount === 0
+          ?null
+          :<button 
+            onClick={()=>sethistoryCount(historyCount -1)}
+            >{`<`}
+          </button>
+        }
+      </div>
+
+      <div 
+        className="macros">
+        {helperFunc(data[historyCount])}
+      </div>
+
+      <div className="next_day">
+        {historyCount === data.length -1
+          ?null
+          :<button 
+            onClick={()=>sethistoryCount(historyCount +1)}
+            >{`>`}
+          </button>
+        }
+      </div> 
     </div>
   )
 }

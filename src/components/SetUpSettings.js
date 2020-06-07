@@ -1,9 +1,12 @@
-import React,{useState} from 'react'
-import {FaRegArrowAltCircleRight,FaRegArrowAltCircleLeft, FaFemale} from 'react-icons/fa'
+import React,{useState, useEffect} from 'react'
+import {FaRegArrowAltCircleLeft, FaFemale} from 'react-icons/fa'
 import {IoIosMan} from 'react-icons/io'
 
+import '../style.css'
 
-export const SetUpSettings = ({setup}) => {
+export const SetUpSettings = ({setup, settingsFunc}) => {
+  const data  = JSON.parse(localStorage.getItem("settings"))
+  const LSsetup = JSON.parse(localStorage.getItem("setup"))
 
   const [gender, setgender] = useState("")
   const [weight, setweight] = useState("")
@@ -14,6 +17,16 @@ export const SetUpSettings = ({setup}) => {
   const [goal, setgoal] = useState("")
   const [sliderVal, setsliderVal] = useState(2)
   const [activityLevel, setactivityLevel]= useState("")
+
+  const finalFunc = async()=>{
+    if(LSsetup){
+      finished();
+      await settingsFunc();
+    }else{
+      finished();
+      await setup()
+    }
+  }
 
   const getWeightNum = e =>{
     setweightNum(e.target.value)
@@ -29,6 +42,20 @@ export const SetUpSettings = ({setup}) => {
     setsliderVal(e.target.value)
   } 
 
+  // useEffect(() => {
+  //   if(data){
+  //     setgender(data[0])
+  //     setweight(data[1])
+  //     setweightNum(data[2])
+  //     setfeet(data[3])
+  //     setinches(data[4])
+  //     setage(data[5])
+  //     setgoal(data[6])
+  //     setsliderVal(data[7])
+  //     setactivityLevel(data[8]) 
+  //   }
+  // })
+
   const finished = () =>{
     localStorage.setItem("settings", JSON.stringify([
       gender, 
@@ -38,7 +65,8 @@ export const SetUpSettings = ({setup}) => {
       inches,
       age,
       goal,
-      sliderVal
+      sliderVal,
+      activityLevel
     ]))
   }
 
@@ -51,6 +79,16 @@ export const SetUpSettings = ({setup}) => {
   }
 
   return (
+    <>
+    <div 
+      onClick={settingsFunc}
+      className={
+        LSsetup?"dash_btn":"no_dash_btn"
+      }>
+      <FaRegArrowAltCircleLeft/>
+    </div>
+
+    <div className="set_up_parent">
     <div className="set_up_settings">
     <div className="gender">
       <h4>Select Gender:</h4>
@@ -68,7 +106,7 @@ export const SetUpSettings = ({setup}) => {
     </div>
       <div className="age">
         <h4>Enter Age:</h4>
-          <input onChange={getAge} type="text" placeholder="Age..."/>
+          <input onChange={getAge} type="text" placeholder="Age..." required/>
       </div>
         <div className="height">
           <h4>Enter Height:</h4>
@@ -108,14 +146,15 @@ export const SetUpSettings = ({setup}) => {
               className={weight === "LB"?"selected":null} onClick={()=>{
               setweight("LB")
               }} 
-              type="radio">LB
+              type="radio" >LB
             </span><br/>
             <input 
+              required
               onChange={getWeightNum} 
               type="text" 
               placeholder={weight === ""
               ?"Enter..."
-              :weight ==="LB"?"lbs...":"Kg..."}
+              :weight ==="LB"?"Lbs...":"Kg..."}
             />
         </div>
   
@@ -196,17 +235,16 @@ export const SetUpSettings = ({setup}) => {
         Very Active
       </span>
     </div>
-    <div className={activityLevel !== ""?"finish_btn_div":"hide_finish_btn"}>
+    <div className={activityLevel !== "" && gender !== "" && weight !== ""?"finish_btn_div":"hide_finish_btn"}>
       <button 
-        onClick={()=>{
-          finished();
-          setup()
-        }}
+        onClick={finalFunc}
         className="finish_btn">
-        Finish
+        {LSsetup? "Update" : "Finish"}
       </button>
     </div>
   </div>
+  </div>
+  </>
   )
 }
 

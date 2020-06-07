@@ -5,6 +5,19 @@ $box-shadow-light-small:3px 8px 14px rgba(200,200,200, 0.9);
 $box-bg-white: rgba(255,255,255, 0.5);
 
 //////////////// SETUP PAGE /////
+.set_up{
+  font-size: 5rem;
+  text-align: center;
+  max-height: 890px;
+    div{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+}
+
+
 .set_up_parent{
   display: grid;
   grid-template-columns: (562px 562px);
@@ -24,6 +37,7 @@ $box-bg-white: rgba(255,255,255, 0.5);
     grid-row: 1/3;
     grid-column: 1/3;
     text-align: center;
+    
 
     .welcome{
       font-size: 4rem;
@@ -38,16 +52,16 @@ $box-bg-white: rgba(255,255,255, 0.5);
     grid-row: 1/3;
     grid-column: 1/3;
     display: grid;
-    grid-template-columns: repeat(2 1fr);
-    grid-template-rows: repeat(5 1fr);
+
+    grid-template-rows: repeat(6, 1fr);
     min-width: 700px;
     min-height: 680px;
     max-height: 800px;
     .gender{
       grid-row: 1/2;
       display: inline-flex;
-      justify-content: space-evenly;
       align-items: center;
+      justify-content: center;
       margin: 0 2rem ;
       border-bottom: 3px solid white;
       h4{
@@ -64,9 +78,10 @@ $box-bg-white: rgba(255,255,255, 0.5);
         padding: 10px;
         opacity: 0.9;
         font-size: 3rem;
-        margin: 1rem 0 1rem 0;
+        margin-left: 10px;
         box-shadow: $box-shadow-dark-small;
         &:hover{
+          cursor: pointer;
           transform: scale(0.98);
           box-sizing: border-box;
           transition: 0.3s ease-in-out;
@@ -79,22 +94,26 @@ $box-bg-white: rgba(255,255,255, 0.5);
     .age{
       grid-row: 2/3;
       display: inline-flex;
-      justify-content: space-evenly;
+      justify-content: center;
       align-items: center;
       margin: 0 2rem ;
       border-bottom: 3px solid white;
       h4{
         font-size: 1.3rem;
         opacity: 0.9;
+        margin-right: 10px;
       }
       input{
         font-size: 1.2rem;
-        border-radius: 10px;
         border: none;
         padding: 3px 0px 3px 10px;
-        box-shadow: $box-shadow-dark-small;
+        border-bottom: 2px solid #333;
         opacity: 0.8;
+        width: 100px;
+        background-color: transparent;
+        margin-left: 10px;
         &:focus{
+          cursor: pointer;
           outline: 2px solid teal;
           outline-offset: 4px;
         }
@@ -104,39 +123,46 @@ $box-bg-white: rgba(255,255,255, 0.5);
     .height{
       grid-row: 3/4;
       display: inline-flex;
-      justify-content: space-evenly;
+      justify-content: center;
       align-items: center;
       margin: 0 2rem 0 2rem;
       border-bottom: 3px solid white;
       
       h4{
+        margin-right: 10px;
         font-size: 1.3rem;
         opacity: 0.9;
       }
 
       select{
         border-radius: 10px;
-        margin-right: -3.5rem;
+        margin-left:10px;
         padding: 1rem;
         border: none;
         box-shadow: $box-shadow-dark-small;
         font-size: 1rem;
         opacity: 0.8;
+        &:hover{
+          cursor: pointer;
+        }
       }
     }
 
     .weight{
+      grid-row: 4/5;
       display: inline-flex;
-      justify-content: space-evenly;
+      justify-content: center;
       align-items: center;
       border-bottom: 3px solid white;
       margin: 0 2rem 0 2rem;
       
       h4{
+        margin-right: 10px;
         font-size: 1.3rem;
         opacity: 0.9;
       }
       span{
+        margin-left: 10px;
         border: 2px solid white;
         background-color: $box-bg-white;
         border-radius: 10px;
@@ -147,6 +173,7 @@ $box-bg-white: rgba(255,255,255, 0.5);
         transition: 0.3s ease-in-out;
         box-shadow: $box-shadow-dark-small;
         &:hover{
+          cursor: pointer;
           transition: 0.3s ease-in-out;
           box-shadow: $box-shadow-light-small;
           transform: scale(0.98);
@@ -154,14 +181,18 @@ $box-bg-white: rgba(255,255,255, 0.5);
       }
 
       input{
+        margin-left: 20px;
         font-size: 1rem;
-        border-radius: 10px;
+        width: 100px;
         border: none;
+        background-color: transparent;
+        border-bottom: 2px solid #333;
+        outline: none;
         font-weight: 500;
         padding: 6px 0px 6px 10px;
-        box-shadow: $box-shadow-dark-small;
         opacity: 0.8;
         &:focus{
+          cursor: pointer;
           outline: 2px solid teal;
           outline-offset: 4px;
         }
@@ -170,17 +201,20 @@ $box-bg-white: rgba(255,255,255, 0.5);
 
     .goal{
       display: inline-flex;
-      justify-content: space-evenly;
+      justify-content: center;
       align-items: center;
       border-bottom: 3px solid white;
       margin: 0 2rem 0 2rem;
+      grid-row: 5/6;
 
       h4{
+        margin-right: 10px;
         font-size: 1.3rem;
         opacity: 0.9;
       }
 
       span{
+        margin-left: 10px;
         opacity: 0.8;
         transition: 0.3s ease-in-out;
         border: 2px solid white;
@@ -189,6 +223,7 @@ $box-bg-white: rgba(255,255,255, 0.5);
         background-color: $box-bg-white;
         box-shadow: $box-shadow-dark-small;
         &:hover{
+          cursor: pointer;
           opacity: 0.8;
           transition: 0.3s ease-in-out;
           transform: scale(0.98);
@@ -199,6 +234,7 @@ $box-bg-white: rgba(255,255,255, 0.5);
         display: none !important;
       }
       .slider_show{
+        margin-left: 20px;
         label{
           font-size: 1rem;
           font-weight: 600;
@@ -212,16 +248,18 @@ $box-bg-white: rgba(255,255,255, 0.5);
     }
 
     .activity{
+      grid-row: 6/7;
       display: inline-flex;
-      justify-content: space-evenly;
+      justify-content: center;
       align-items: center;
       border-bottom: 3px solid white;
       margin: 0 2rem 0 2rem;
 
       h4{
+
         font-size: 1.3rem;
         opacity: 0.9;
-        margin-right: 0.2rem;
+        margin-right: 10px;
       }
 
       span{
@@ -229,9 +267,10 @@ $box-bg-white: rgba(255,255,255, 0.5);
         border-radius: 10px;
         background-color: $box-bg-white;
         padding: 0.6rem;
-        margin: 0 0.3rem;
+        margin-left: 10px;
         box-shadow: $box-shadow-dark-small;
         &:hover{
+          cursor: pointer;
           box-shadow: $box-shadow-light-small;
         }
       }
@@ -255,6 +294,7 @@ $box-bg-white: rgba(255,255,255, 0.5);
           font-size: 1.3rem;
           opacity: 0.9;
           &:hover{
+            cursor: pointer;
             transition: 0.3s ease-in-out;
             background-color:rgba(36, 161, 36,0.8);
             color: white;
@@ -275,49 +315,57 @@ $box-bg-white: rgba(255,255,255, 0.5);
 //////////////////////// DASHBOARD ///////////////////
 
 .dashboard{
-  border: 0.1px solid silver;
-  height: 97vh;
-  text-align: center;
-  h3{
-    opacity: 0.8;
-    text-decoration: underline;
-    font-size: 4rem;
-  }
   .inner_dash{
-    text-align: center;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    height: 45vh;
+    display: grid;
+    grid-template-columns: 0.1fr 1fr 1fr 0.1fr;
+    grid-template-rows:  1fr 1fr ;
+    grid-column-gap: 2rem;
+    grid-row-gap: 12px;
+   
 
-    div{
-      border-radius: 10px;
-      transition: 0.4s ease-in-out;
-      border: 2px solid white ;
-      width: 50%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      margin: 10px;
-      height: 30vh;
-      background-color: white;
-      opacity: 0.5;
-      font-size: 10rem;
-      box-shadow: 5px 10px 20px rgb(75, 75, 75);
-      
-      &:hover{
-        cursor: pointer;
+      div{
+        background-color: $box-bg-white;
+        border-radius: 10px;
         transition: 0.4s ease-in-out;
-        transform: scale(1.04);
-        box-shadow: 10px 15px 25px rgb(125, 125, 125);
+        border: 2px solid white ;
+        width: 85%;
+        display: flex;
+        margin-top: 2rem;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 3rem 1.5rem;
+        background-color: white;
+        opacity: 0.5;
+        font-size: 14rem;
+        box-shadow: 5px 10px 20px rgb(75, 75, 75);
+        span{
+          font-size: 1.3rem;
+        }
+        &:hover{
+          transition: 0.4s ease-in-out;
+          cursor: pointer;
+          transform: scale(1.05);
+        }
       }
-      span{
-        margin-top: 5px;
-        margin-bottom: -10px;
-        font-size: 1.5rem;
+      .tracker{
+        grid-row: 1/2;
+        grid-column: 2/3;     
       }
-    }
+      .History{
+        grid-row: 1/2;
+        grid-column: 3/4;     
+      }
+      .settings{
+        grid-row: 2/3;
+        grid-column: 2/3;    
+      }
+      .tips{
+        grid-row: 2/3;
+        grid-column: 3/4;
+      }
+    
+    
   }
 }
 
@@ -328,8 +376,9 @@ $box-bg-white: rgba(255,255,255, 0.5);
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 1fr 1fr 1fr;
 
-
+  
   .stats{
+    border-radius: 10px;
     margin-top: 2.5rem;
     grid-row: 1/3;
     grid-column: 1/2;
@@ -341,7 +390,7 @@ $box-bg-white: rgba(255,255,255, 0.5);
       height: 10px;
       width: 125px;
       border-radius: 1em;
-      border: 1px solid rgb(209, 209, 209);
+      border: 2px solid rgb(55, 55, 55);
     }
     .filler{
       background:rgb(54, 54, 197);
@@ -349,11 +398,31 @@ $box-bg-white: rgba(255,255,255, 0.5);
       border-radius: inherit;
       transition: width .3s ease-in;
     }
+    .stats{
+      background-color: $box-bg-white;
+      padding: 1rem;
+      box-shadow: $box-shadow-dark-small;
+    }
   }
 
   .tracker_dash_btn{
-    grid-row: 3/4;
+    grid-row: 1/2;
     grid-column: 1/2;
+    border-radius: 10px;
+    transition: 0.3s ease-in-out;
+    font-size: 4rem;
+  
+    height: 70px;
+    width: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+      &:hover{
+        cursor: pointer;
+        color: whitesmoke;
+        transition: 0.3s ease-in-out;
+        transform: scale(1.05);
+      } 
   }
   .searching{
     grid-row: 1/2;
@@ -362,6 +431,9 @@ $box-bg-white: rgba(255,255,255, 0.5);
     flex-direction: column;
     text-align: center;
     
+    h4{
+      font-size: 1.2rem;
+    }
 
     .search_bar{
       border-radius: 1rem;
@@ -395,7 +467,7 @@ $box-bg-white: rgba(255,255,255, 0.5);
   }
 
   .open{
-    margin-top: 5rem;
+    margin-top: 10rem;
     grid-row: 1/4;
     grid-column: 2/4;
     
@@ -420,9 +492,9 @@ $box-bg-white: rgba(255,255,255, 0.5);
       } 
 
       .add_food_btn{
-        display: flex;
-        justify-content: end;
+        display: grid;
         button{
+          place-self: self-end;
           transition: 0.2s ease-in-out;
           border-radius: 50%;
           height: 45px;
@@ -487,13 +559,155 @@ $box-bg-white: rgba(255,255,255, 0.5);
 
   .todays_food{
     margin: 5rem 0 0 3rem;
+    padding: 10px;
+    min-height: 453px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    background-color: $box-bg-white;
+    border-radius: 10px;
+    box-shadow: $box-shadow-dark-small;
 
 
+    .food_index_num{
+      color: rgb(168, 5, 168);
+    }
   }
 }
 
 
+///////////////////////// HISTORY PAGE ////////////// 
 
+.history_parent_div{
+  display: grid;
+  grid-template-columns: 0.5fr 4fr 0.5fr;
+  grid-template-rows: 0.5fr 1fr 0.5fr;
+
+  .dash_btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem 0;
+    button{
+      transition: 0.3s ease-in-out;
+      border: none;
+      background-color: transparent;
+      font-size: 5rem;
+      color: rgba(0, 0, 0, 0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &:hover{
+        cursor: pointer;
+        transition: 0.3s ease-in-out;
+        transform: scale(1.05);
+        color: rgba(255, 255, 255,0.721);
+      }
+    }
+  }
+
+  .prev_day{
+    grid-row: 2/3;
+    grid-column: 1/2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    button{
+      font-size: 5rem;
+      padding: 0;
+      background-color: transparent;
+      border: none;
+      transition: 0.3s ease-in-out;
+      color: rgba(255, 255, 255, 0.6);
+      &:hover{
+        transition: 0.3s ease-in-out;
+        transform: scale(1.1);
+        cursor: pointer;
+        color: rgba(255, 255, 255, 0.8);
+      }
+    }
+  }
+  .next_day{
+    grid-row:2/3;
+    grid-column: 3/4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    button{
+      font-size: 5rem;
+      padding: 0;
+      background-color: transparent;
+      border: none;
+      transition: 0.3s ease-in-out;
+      color: rgba(255, 255, 255, 0.6);
+      &:hover{
+        transition: 0.3s ease-in-out;
+        transform: scale(1.1);
+        cursor: pointer;
+        color: rgba(255, 255, 255, 0.8);
+      }
+    }
+  }
+  .macros{
+    grid-row: 2/3;
+    grid-column: 2/3;
+    .sub_macros{
+      background-color: $box-bg-white;
+      border-radius: 10px;
+      padding: 10px;
+      box-shadow: $box-shadow-dark-large;
+      .date{
+        font-size: 1.7rem;
+        text-align: center;
+        text-decoration: underline;
+        color: #333;
+      }
+      .history_stats{
+        h5{
+          display: inline-flex;
+          text-align: center;
+          margin-left: 1rem;
+          border-right: 2px solid white;
+          padding-right: 1rem;
+          font-size: 17px;
+          color: #333;
+          &:last-of-type{
+            border: none;
+          }
+
+          span{
+            margin-left: 4px;
+            font-size: 18px;
+            color: purple;
+          }
+        }
+      }
+
+      .history_foods{
+        text-align: center;
+        font-size: 18px;
+      }
+    }
+  }
+}
+  
+
+
+///////// EXTRAS ////////@extend#
+
+.dash_btn{
+  z-index: 100;
+  float: left;
+  transition: 0.3s ease-in-out;
+  font-size: 3rem;
+  color: rgba(50, 50, 50, 0.8);
+    &:hover{
+      z-index: 101;
+      transition: 0.3s ease-in-out;
+      cursor: pointer;
+      color: rgba(240, 240, 240, 0.8);
+    }
+}
+.no_dash_btn{
+  display: none;
+}

@@ -4,9 +4,8 @@ import './style.css';
 import Dashbaord from './components/dashbaord';
 import History from './components/history';
 import Search from './components/search';
-import Settings from './components/settings'
+import SetUpSettings from './components/SetUpSettings'
 import Tips from './components/tips'
-
 
 const App = () =>{
 
@@ -63,7 +62,7 @@ const App = () =>{
               historyFunc={toggleHistory}
             />
           :setUpComplete && settings
-            ?<Settings 
+            ?<SetUpSettings
               settingsFunc={toggleSettings}
             />
           :setUpComplete && tips

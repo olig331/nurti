@@ -9,7 +9,8 @@ function createWindow () {
     width: 1124,
     height: 900,
     title: "Nutri",
-    resizable:"false",
+    resizable:false,
+    frame: true,
     webPreferences: {
       nodeIntegration: true
     }
@@ -33,7 +34,7 @@ function createWindow () {
     )
 
   // Open the DevTools.
-  // win.webContents.openDevTools()
+  win.webContents.openDevTools()
 }
 
 // This method will be called when Electron has finished

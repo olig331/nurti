@@ -3,6 +3,7 @@ import Stats from './stats'
 import {FaPlus} from 'react-icons/fa'
 import '../style.css'
 import TodaysFood from './TodaysFood'
+import {FaRegArrowAltCircleLeft} from 'react-icons/fa'
 
 export const Search = ({trackerFunc}) => {
 
@@ -108,7 +109,7 @@ export const Search = ({trackerFunc}) => {
 
   const getNutrition = async () =>{
     const response = await fetch (
-      `https://api.nutritionix.com/v1_1/search/${search}?results=0:10&fields=item_name,brand_name,item_id,nf_calories,nf_protein,nf_sugars,nf_total_fat,nf_total_carbohydrate,nf_saturated_fat,nf_serving_weight_grams&appId=${APP_ID}&appKey=${APP_KEY}`
+      `https://api.nutritionix.com/v1_1/search/${search}?results=0:7&fields=item_name,brand_name,item_id,nf_calories,nf_protein,nf_sugars,nf_total_fat,nf_total_carbohydrate,nf_saturated_fat,nf_serving_weight_grams&appId=${APP_ID}&appKey=${APP_KEY}`
     );
       const data = await response.json();
       setitems(data.hits)
@@ -154,7 +155,12 @@ export const Search = ({trackerFunc}) => {
 
   return (
     <div className="search"> 
-      <div className="tracker_dash_btn"><button onClick={trackerFunc}>Dash</button></div>
+      <div 
+        onClick={trackerFunc} 
+        className="tracker_dash_btn"
+      >
+        <FaRegArrowAltCircleLeft />  
+      </div>
       <div className="stats">
         <Stats
           calsTotal={caloriesTotal}
@@ -167,6 +173,7 @@ export const Search = ({trackerFunc}) => {
         />
       </div>
       <div className="searching">
+        <h4>{new Date().toDateString()}</h4>
         <input className="search_bar" type="text" placeholder="Search..." onChange={getSearch}/>
         <div>
           <button className="search_btn" onClick={updateSearch}>Search!</button>{` `}

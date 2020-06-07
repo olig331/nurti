@@ -10,7 +10,6 @@ export const Dashbaord = ({tipsFunc, settingsFunc, trackerFunc, historyFunc}) =>
 
   return (
     <div className="dashboard">
-      <h3>Dashboard</h3>
       <div className="inner_dash">
         <div onClick={trackerFunc} className="tracker">
           <BsPencilSquare/>
