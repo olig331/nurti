@@ -25,6 +25,26 @@ $box-bg-white: rgba(255,255,255, 0.5);
   align-items: center;
   justify-items: center;
 
+  .dash_btn{
+    grid-row: 1/2;
+    grid-column: 1/2;
+    display: grid;
+    place-self: start;
+    z-index: 100;
+    transition: 0.3s ease-in-out;
+    font-size: 3rem;
+    color: rgba(50, 50, 50, 0.8);
+      &:hover{
+        z-index: 101;
+        transition: 0.3s ease-in-out;
+        cursor: pointer;
+        color: rgba(240, 240, 240, 0.8);
+      }
+  }
+  .no_dash_btn{
+    display: none;
+  }
+
   .selected{
     transition: 0.2s ease-in-out!important;
     border: none !important;
@@ -693,21 +713,5 @@ $box-bg-white: rgba(255,255,255, 0.5);
   
 
 
-///////// EXTRAS ////////@extend#
+///////// EXTRAS //////// 
 
-.dash_btn{
-  z-index: 100;
-  float: left;
-  transition: 0.3s ease-in-out;
-  font-size: 3rem;
-  color: rgba(50, 50, 50, 0.8);
-    &:hover{
-      z-index: 101;
-      transition: 0.3s ease-in-out;
-      cursor: pointer;
-      color: rgba(240, 240, 240, 0.8);
-    }
-}
-.no_dash_btn{
-  display: none;
-}

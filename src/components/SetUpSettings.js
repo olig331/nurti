@@ -80,6 +80,9 @@ export const SetUpSettings = ({setup, settingsFunc}) => {
 
   return (
     <>
+    
+
+    <div className="set_up_parent">
     <div 
       onClick={settingsFunc}
       className={
@@ -87,8 +90,6 @@ export const SetUpSettings = ({setup, settingsFunc}) => {
       }>
       <FaRegArrowAltCircleLeft/>
     </div>
-
-    <div className="set_up_parent">
     <div className="set_up_settings">
     <div className="gender">
       <h4>Select Gender:</h4>
